@@ -23,7 +23,7 @@ RUN ln -s /usr/local/instantclient_12_1/libclntsh.so.12.1 /usr/local/instantclie
 RUN docker-php-ext-configure oci8 --with-oci8=instantclient,/usr/local/instantclient_12_1,12.1 \ 
 	&& docker-php-ext-configure pdo_oci --with-pdo-oci=instantclient,/usr/local/instantclient_12_1,12.1
 
-RUN apt-get install -y git libaio1 libmcrypt-dev freetds-dev libicu-dev libpq-dev libsqlite3-dev libssl-dev libpng-dev  zlib1g-dev unixodbc-dev gcc g++ build-essential \
+RUN apt-get install -y zip git libaio1 libmcrypt-dev freetds-dev libicu-dev libpq-dev libsqlite3-dev libssl-dev libpng-dev  zlib1g-dev unixodbc-dev gcc g++ build-essential \
 	&& cp -s /usr/lib/x86_64-linux-gnu/libsybdb.so /usr/lib/
 
 
@@ -37,6 +37,6 @@ RUN pecl install mongodb redis sqlsrv pdo_sqlsrv pdo_dblib \
 	&& echo "extension=redis.so" > /usr/local/etc/php/conf.d/docker-php-ext-redis.ini
 
 RUN curl -L -o /tmp/composer-setup.php https://getcomposer.org/installer 
-RUN php /tmp/composer-setup.php --install-dir=/usr/local/bin
+RUN php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
 RUN service apache2 restart
